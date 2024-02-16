@@ -1,4 +1,4 @@
-class Stos:
+class Stack:
     def __init__(self):  # Konstruktor
         self.items = []
 
@@ -37,29 +37,29 @@ class Stos:
         print()
 
 
-def check_brackets_ext(ciag):
-    nawiasy = Stos()
-    nawiasy_odwrocone = {'(': ')', '[': ']', '{': '}'}
+def check_brackets_ext(seq):
+    brackets = Stack()
+    brackets_reversed = {'(': ')', '[': ']', '{': '}'}
 
-    if len(ciag) == 0:
+    if len(seq) == 0:
         return False
 
-    for znak in ciag:
-        if znak in '([{':
-            nawiasy.push(znak)
-        elif znak in ')]}' and not nawiasy.is_empty():
-            if znak == nawiasy_odwrocone[nawiasy.items[len(nawiasy.items) - 1]]:
-                nawiasy.pop()
+    for char in seq:
+        if char in '([{':
+            brackets.push(znak)
+        elif char in ')]}' and not brackets.is_empty():
+            if char == brackets_reversed[brackets.items[len(brackets.items) - 1]]:
+                brackets.pop()
         else:
-            nawiasy.clear()
+            brackets.clear()
             return False
 
-    if nawiasy.is_empty():
+    if brackets.is_empty():
         return True
     else:
-        nawiasy.clear()
+        brackets.clear()
         return False
 
 
-dane = input("Wprowadz ciag okraglych, kwadratowych i klamrowych nawiasow:")
-print(check_brackets_ext(dane))
+data = input("Wprowadz ciag okraglych, kwadratowych i klamrowych nawiasow:")
+print(check_brackets_ext(data))
